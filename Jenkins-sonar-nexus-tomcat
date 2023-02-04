@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'git cloning', url: 'https://github.com/AkhilKanthakadi009/myweb.git'
+                git credentialsId: 'Clone', url: 'https://github.com/AkhilKanthakadi009/myweb.git'
             }
         }
         stage("Maven Build"){
@@ -19,21 +19,20 @@ pipeline{
         stage('Upload War To Nexus'){
             steps{
                 nexusArtifactUploader artifacts: 
-		                      [
-				      [
-				      artifactId: 'myweb', 
-				      classifier: '', 
-				      file: 'target/myweb-8.3.3-SNAPSHOT.war', 
-				      type: 'war'
-				      ]
-				      ], 
-				      credentialsId: 'nexusbackup', 
-				      groupId: 'in.javahome', 
-				      nexusUrl: '54.90.223.15:8081', 
-				      nexusVersion: 'nexus3', 
-				      protocol: 'http', 
-				      repository: 'sample-snapshot', 
-				      version: '8.3.3-SNAPSHOT'
+		[
+			[artifactId: 'myweb', 
+			classifier: '', 
+			file: 'target/myweb-8.3.4-SNAPSHOT.war', 
+			type: 'war'
+			]
+		], 
+			credentialsId: 'Backup', 
+			groupId: 'in.javahome', 
+			nexusUrl: '107.20.13.74:8081/', 
+			nexusVersion: 'nexus3', 
+			protocol: 'http', 
+			repository: 'sample-snapshot', 
+			version: '8.3.4-SNAPSHOT'
               }
             }
         stage("deploy-dev"){
